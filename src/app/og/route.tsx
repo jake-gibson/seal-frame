@@ -6,6 +6,7 @@ export const runtime = 'edge';
 
 export async function GET(request: Request) {
   try {
+
     const { searchParams } = new URL(request.url);
 
     // ?title=<title>
