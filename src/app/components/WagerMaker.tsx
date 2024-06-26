@@ -8,13 +8,13 @@ const WagerMaker = () => {
     const question = (document.querySelector('#question') as HTMLInputElement)
       .value;
 
-    const { push } = useRouter();
+    // const { push } = useRouter();
 
-    const searchParams = new URLSearchParams({
-      title: `${question}`,
-    });
+    // const searchParams = new URLSearchParams({
+    //   title: `${question}`,
+    // });
 
-    push(`/question/${searchParams}`);
+    // push(`/question/${searchParams}`);
   };
 
   return (
