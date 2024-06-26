@@ -26,44 +26,81 @@ export async function GET(request: Request) {
             height: '100%',
             width: '100%',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
             flexDirection: 'column',
-            backgroundImage: 'linear-gradient(to bottom, #dbf4ff, #fff1f1)',
-            fontSize: 80,
-            fontWeight: 700,
+            backgroundColor: '#082759',
             textAlign: 'center',
-            border: '1px solid black',
           }}
         >
-          <p
+          <div
             style={{
-              backgroundImage:
-                'linear-gradient(90deg, rgb(0, 124, 240), rgb(0, 223, 216))',
-              backgroundClip: 'text',
-              color: 'transparent',
-              fontSize: 80,
-              fontWeight: 700,
-              margin: 0,
+              borderBottom: '1px dashed white',
+              height: '20%',
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              boxSizing: 'border-box',
             }}
           >
-            {title}
-          </p>
-          {hasTotal && (
+            <p
+              style={{
+                color: 'white',
+                fontStyle: 'italic',
+                fontFamily: 'latin',
+                fontSize: 40,
+                fontWeight: 900,
+                marginLeft: '5%',
+              }}
+            >
+              Daily Wager
+            </p>
+            <p style={{ fontSize: 40, fontWeight: 900, marginRight: '5%' }}>
+              Kramer
+            </p>
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              width: '100%',
+              padding: '5%',
+              alignItems: 'center',
+              boxSizing: 'border-box',
+            }}
+          >
             <p
               style={{
                 backgroundImage:
-                  'linear-gradient(90deg, rgb(121, 40, 202), rgb(255, 0, 128))',
+                  'linear-gradient(90deg, rgb(0, 124, 240), rgb(0, 223, 216))',
                 backgroundClip: 'text',
                 color: 'transparent',
-                fontSize: 80,
+                fontSize: 50,
                 fontWeight: 700,
                 margin: 0,
-                marginTop: 20,
+                width: '50%',
               }}
             >
-              {`Total: ${total}  Yes: ${yes}  No: ${no}`}
+              {title}
             </p>
-          )}
+            {hasTotal && (
+              <p
+                style={{
+                  backgroundImage:
+                    'linear-gradient(90deg, rgb(121, 40, 202), rgb(255, 0, 128))',
+                  backgroundClip: 'text',
+                  color: 'transparent',
+                  fontSize: 50,
+                  fontWeight: 700,
+                  margin: 0,
+                  marginTop: 20,
+                  width: '50%',
+                }}
+              >
+                {`Total: ${total}  Yes: ${yes}  No: ${no}`}
+              </p>
+            )}
+          </div>
         </div>
       ),
       {
