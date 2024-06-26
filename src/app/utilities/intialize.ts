@@ -47,5 +47,4 @@ export async function castVote(req: NextRequest, choice: string) {
   console.log(voters);
   const counts = await kv.hgetall('test:count');
   console.log(counts);
-  // await multi.exec();
 }
