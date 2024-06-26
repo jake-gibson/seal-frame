@@ -13,6 +13,7 @@ export async function GET(request: Request) {
     const title = hasTitle ? searchParams.get('title')?.slice(0, 100) : '';
 
     // ?total=...
+    const hasTotal = searchParams.has('total');
     const total = searchParams.get('total');
     const yes = searchParams.get('yes');
     const no = searchParams.get('no');
@@ -47,20 +48,22 @@ export async function GET(request: Request) {
           >
             {title}
           </p>
-          <p
-            style={{
-              backgroundImage:
-                'linear-gradient(90deg, rgb(121, 40, 202), rgb(255, 0, 128))',
-              backgroundClip: 'text',
-              color: 'transparent',
-              fontSize: 80,
-              fontWeight: 700,
-              margin: 0,
-              marginTop: 20,
-            }}
-          >
-            {`Total: ${total}  Yes: ${yes}  No: ${no}`}
-          </p>
+          {hasTotal && (
+            <p
+              style={{
+                backgroundImage:
+                  'linear-gradient(90deg, rgb(121, 40, 202), rgb(255, 0, 128))',
+                backgroundClip: 'text',
+                color: 'transparent',
+                fontSize: 80,
+                fontWeight: 700,
+                margin: 0,
+                marginTop: 20,
+              }}
+            >
+              {`Total: ${total}  Yes: ${yes}  No: ${no}`}
+            </p>
+          )}
         </div>
       ),
       {
