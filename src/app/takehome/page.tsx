@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import WagerMaker from './components/WagerMaker';
+import WagerMaker from '../components/WagerMaker';
 
 //in here
 //we present the frame with 'yes' and 'no' options
