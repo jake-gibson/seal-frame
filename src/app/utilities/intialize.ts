@@ -11,11 +11,10 @@ interface voterInfo {
 }
 
 interface counters {
-  total: number,
-  yes: number,
-  no: number,
+  total: number;
+  yes: number;
+  no: number;
 }
-
 
 export async function initialize() {
   const keys = await kv.hkeys('test:count');
@@ -27,22 +26,25 @@ export async function initialize() {
   // }
 }
 
-export async function castVote(req: NextRequest, choice: string): Promise<voterInfo> {
+export async function castVote(
+  req: NextRequest,
+  choice: string
+): Promise<voterInfo> {
   const voterData: voterInfo = {
     voted: false,
     myVote: choice,
     total: 0,
     yes: 0,
     no: 0,
-  }
+  };
 
   const body: FrameRequest = await req.json();
 
   const { untrustedData } = body;
-  const user = untrustedData.inputText || 0;
+  const user = untrustedData.fid || 0;
 
-  //eventually test will be a specific date and poll number '06252024:0001:votes'
-  //check length
+  //eventually test will be a specific date and poll number '06252024:0001:voters'
+
   const keys = await kv.hkeys('test:voters');
   if (keys.length === 0) {
     initialize();
@@ -51,11 +53,10 @@ export async function castVote(req: NextRequest, choice: string): Promise<voterI
   console.log('my vote is:', choice);
 
   const voted = (await kv.hget('test:voters', `${user}`)) as unknown as string;
-  if(voted) {
+  if (voted) {
     voterData.myVote = voted;
     voterData.voted = true;
-  }
-  else {
+  } else {
     //Record user as a voter
     await kv.hset('test:voters', { [user]: choice });
 

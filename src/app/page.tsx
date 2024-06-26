@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   other: {
     'fc:frame': 'vNext',
     'fc:frame:image': `${process.env.NEXT_PUBLIC_SITE_URL}/og?${searchParams}`,
-    'fc:frame:input:text': 'FiD',
+    // 'fc:frame:input:text': 'FiD',
     'fc:frame:button:1': 'Yes',
     'fc:frame:button:1:post_url': `${process.env.NEXT_PUBLIC_SITE_URL}/api/vote?choice=yes`,
     'fc:frame:button:2': 'No',

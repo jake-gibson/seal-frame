@@ -10,7 +10,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   const voteParams = new URLSearchParams({
     title: voterData.voted
-      ? `Sorry, you already voted ${voterData.myVote}. You can't vote twice.`
+      ? `Sorry, you already voted ${voterData.myVote}.\nYou can't vote twice.`
       : `You voted ${choice?.toUpperCase()}!`,
     total: `${voterData.total}`,
     yes: `${voterData.yes}`,

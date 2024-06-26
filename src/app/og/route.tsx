@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/og';
+import { Inter, Roboto, Rubik } from 'next/font/google';
 // App router includes @vercel/og.
 // No need to install it.
 
@@ -17,6 +18,8 @@ export async function GET(request: Request) {
     const total = searchParams.get('total');
     const yes = searchParams.get('yes');
     const no = searchParams.get('no');
+    const yesPercent = Number(yes) / Number(total);
+    const noPercent = Number(no) / Number(total);
 
     return new ImageResponse(
       (
@@ -28,13 +31,14 @@ export async function GET(request: Request) {
             alignItems: 'center',
             justifyContent: 'flex-start',
             flexDirection: 'column',
-            backgroundColor: '#082759',
+            backgroundColor: 'rgb(71, 85, 105)',
             textAlign: 'center',
           }}
         >
           <div
             style={{
               borderBottom: '1px dashed white',
+              backgroundColor: 'rgb(34, 197, 94)',
               height: '20%',
               width: '100%',
               display: 'flex',
@@ -47,26 +51,44 @@ export async function GET(request: Request) {
               style={{
                 color: 'white',
                 fontStyle: 'italic',
-                fontFamily: 'latin',
+                fontFamily: 'roboto',
                 fontSize: 40,
                 fontWeight: 900,
                 marginLeft: '5%',
               }}
             >
-              Daily Wager
+              Daily Question
             </p>
-            <p style={{ fontSize: 40, fontWeight: 900, marginRight: '5%' }}>
-              Kramer
-            </p>
+            <div
+              style={{
+                height: '12vh',
+                width: '12vh',
+                backgroundColor: 'white',
+                marginRight: '5%',
+                borderRadius: '50%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                fontSize: 65,
+              }}
+            >
+              🌎
+            </div>
           </div>
           <div
             style={{
               display: 'flex',
-              justifyContent: 'space-between',
+              flexDirection: 'column',
+              paddingLeft: '5%',
+              paddingRight: '5%',
+              height: '80%',
+              justifyContent: `${hasTotal ? 'center' : 'center'}`,
               width: '100%',
-              padding: '5%',
               alignItems: 'center',
               boxSizing: 'border-box',
+              backgroundSize: '40px 40px',
+              backgroundImage:
+                'linear-gradient(to right, rgb(90, 104, 125) 1px, transparent 1px), linear-gradient(to bottom, rgb(90, 104, 125) 1px, transparent 1px)',
             }}
           >
             <p
@@ -75,30 +97,92 @@ export async function GET(request: Request) {
                   'linear-gradient(90deg, rgb(0, 124, 240), rgb(0, 223, 216))',
                 backgroundClip: 'text',
                 color: 'transparent',
-                fontSize: 50,
+                fontSize: `${hasTotal ? '60' : '80'}`,
                 fontWeight: 700,
-                margin: 0,
-                width: '50%',
+                marginBottom: '5%',
               }}
             >
               {title}
             </p>
             {hasTotal && (
-              <p
+              <div
                 style={{
-                  backgroundImage:
-                    'linear-gradient(90deg, rgb(121, 40, 202), rgb(255, 0, 128))',
-                  backgroundClip: 'text',
-                  color: 'transparent',
-                  fontSize: 50,
-                  fontWeight: 700,
-                  margin: 0,
-                  marginTop: 20,
-                  width: '50%',
+                  height: '25%',
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }}
               >
-                {`Total: ${total}  Yes: ${yes}  No: ${no}`}
-              </p>
+                <p
+                  style={{
+                    backgroundImage:
+                      'linear-gradient(90deg, rgb(25, 194, 36), rgb(125, 201, 75))',
+                    backgroundClip: 'text',
+                    color: 'transparent',
+                    fontSize: 50,
+                    fontWeight: 900,
+                    margin: 0,
+                  }}
+                >
+                  {`Yes`}
+                </p>
+                <div
+                  style={{
+                    height: '100%',
+                    width: '60%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    margin: '3%',
+                    border: '2px solid white',
+                    borderRadius: '30px',
+                    overflow: 'hidden',
+                  }}
+                >
+                  <div
+                    style={{
+                      height: '100%',
+                      width: `${Math.round(yesPercent * 100)}%`,
+                      backgroundImage:
+                        'linear-gradient(90deg, rgb(25, 194, 36), rgb(125, 201, 75))',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      color: 'white',
+                      fontSize: 30,
+                    }}
+                  >
+                    {`${yesPercent.toFixed(2).slice(2)}%`}
+                  </div>
+                  <div
+                    style={{
+                      height: '100%',
+                      width: `${Math.round(noPercent * 100)}%`,
+                      backgroundImage:
+                        'linear-gradient(90deg, rgb(255, 0, 128), rgb(191, 19, 74))',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      color: 'white',
+                      fontSize: 30,
+                    }}
+                  >{`${noPercent.toFixed(2).slice(2)}%`}</div>
+                </div>
+                <p
+                  style={{
+                    backgroundImage:
+                      'linear-gradient(90deg, rgb(191, 19, 74), rgb(255, 0, 128))',
+                    backgroundClip: 'text',
+                    color: 'transparent',
+                    fontSize: 50,
+                    fontWeight: 900,
+                    margin: 0,
+                  }}
+                >
+                  {`No`}
+                </p>
+              </div>
             )}
           </div>
         </div>
