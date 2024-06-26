@@ -44,7 +44,7 @@ const WagerMaker = () => {
       {link && (
         <div className="flex flex-col justify-center items-center border border-white rounded w-3/6 h-1/6 p-5 bg-slate-500 font-mono">
           <p className="text-left italic mb-2 self-start text-white text-sm">
-            Here's your link:
+            Here is your link:
           </p>
           <span className="flex items-center justify-around w-full">
             <div className="rounded text-xs px-3 text-slate-600 w-9/12 h-full overflow-scroll bg-slate-200">

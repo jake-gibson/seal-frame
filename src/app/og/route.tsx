@@ -125,7 +125,7 @@ export async function GET(request: Request) {
                     margin: 0,
                   }}
                 >
-                  {`Yes`}
+                  {`Yes (${yes})`}
                 </p>
                 <div
                   style={{
@@ -180,7 +180,7 @@ export async function GET(request: Request) {
                     margin: 0,
                   }}
                 >
-                  {`No`}
+                  {`No (${no})`}
                 </p>
               </div>
             )}
