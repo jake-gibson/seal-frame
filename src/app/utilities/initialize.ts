@@ -20,10 +20,10 @@ export async function initialize() {
   const keys = await kv.hkeys('test:count');
   console.log('my keys are:', keys);
   //if length doesnt exist then initiliaze (separate file) both hashes
-  // if (keys.length === 0) {
-  const results = await kv.hset('test:count', { total: 0, yes: 0, no: 0 });
-  console.log('length should now be 3:', results);
-  // }
+  if (keys.length === 0) {
+    const results = await kv.hset('test:count', { total: 0, yes: 0, no: 0 });
+    console.log('length should now be 3:', results);
+  }
 }
 
 export async function castVote(

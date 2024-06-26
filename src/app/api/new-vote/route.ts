@@ -1,12 +1,12 @@
-import { castVote } from '../../utilities/initialize';
+import { castVote } from '../../utilities/initialize-id';
 import { NextRequest, NextResponse } from 'next/server';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   const searchParams = req.nextUrl.searchParams;
+  const question = searchParams.get('question'); //hex representing the string
   const choice = searchParams.get('choice');
 
-  //here i need to initialize of figure out middleware
-  const voterData = await castVote(req, choice as string);
+  const voterData = await castVote(req, question as string, choice as string);
 
   const voteParams = new URLSearchParams({
     title: voterData.voted

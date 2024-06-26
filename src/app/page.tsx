@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { initialize } from './utilities/intialize';
 import WagerMaker from './components/WagerMaker';
 
 //in here
@@ -33,7 +32,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="flex justify-center items-center h-screen w-100 p-5 bg-slate-800">
+    <div className="flex flex-col justify-center items-center h-screen w-100 p-5 bg-slate-800">
       <WagerMaker />
     </div>
   );
