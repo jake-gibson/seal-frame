@@ -23,6 +23,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     <meta property="fc:frame" content="vNext" />
     <meta property="fc:frame:image" content="${process.env.NEXT_PUBLIC_SITE_URL}/og?${voteParams}" />
     <meta property="fc:frame:button:1" content="Make your own Wager" />
+    <meta property="fc:frame:button:1:action" content="link" />
+    <meta property="fc:frame:button:1:target" content="https://seal-frame-plum.vercel.app/" />
     </head></html>`);
 }
 
