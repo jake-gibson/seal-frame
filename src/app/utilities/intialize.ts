@@ -1,10 +1,21 @@
 import { FrameRequest, getFrameHtmlResponse } from '@coinbase/onchainkit/frame';
 import { NextRequest } from 'next/server';
 import { kv } from '@vercel/kv';
-// const multi = kv.multi();
-// multi.hset('test:count', { total: 0, yes: 0, no: 0 });
-// multi.hset('test:voters', {});
-// await multi.exec();
+
+interface voterInfo {
+  voted: Boolean;
+  myVote: string;
+  total: number;
+  yes: number;
+  no: number;
+}
+
+interface counters {
+  total: number,
+  yes: number,
+  no: number,
+}
+
 
 export async function initialize() {
   const keys = await kv.hkeys('test:count');
@@ -16,10 +27,17 @@ export async function initialize() {
   // }
 }
 
-export async function castVote(req: NextRequest, choice: string) {
+export async function castVote(req: NextRequest, choice: string): Promise<voterInfo> {
+  const voterData: voterInfo = {
+    voted: false,
+    myVote: choice,
+    total: 0,
+    yes: 0,
+    no: 0,
+  }
+
   const body: FrameRequest = await req.json();
 
-  //get the untrusted data
   const { untrustedData } = body;
   const user = untrustedData.inputText || 0;
 
@@ -33,18 +51,24 @@ export async function castVote(req: NextRequest, choice: string) {
   console.log('my vote is:', choice);
 
   const voted = await kv.hget('test:voters', `${user}`);
-
-  if (!voted) {
+  if(voted) voterData.voted = true;
+  else {
+    //Record user as a voter
     await kv.hset('test:voters', { [user]: choice });
-    // const voted = await kv.hget('test:voters', `${user}`);
-    // console.log(voted);
 
+    //Increment user's vote type and the total, each by 1
     await kv.hincrby('test:count', 'total', 1);
     await kv.hincrby('test:count', `${choice}`, 1);
   }
 
   const voters = await kv.hgetall('test:voters');
   console.log(voters);
-  const counts = await kv.hgetall('test:count');
+  const counts = (await kv.hgetall('test:count')) as unknown as counters;
   console.log(counts);
+
+  voterData.total = counts.total || 0;
+  voterData.yes = counts.yes || 0;
+  voterData.no = counts.no || 0;
+
+  return voterData;
 }

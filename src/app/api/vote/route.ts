@@ -6,10 +6,12 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const choice = searchParams.get('choice');
 
   //here i need to initialize of figure out middleware
-  castVote(req, choice as string);
+  const voted = await castVote(req, choice as string);
 
   const voteParams = new URLSearchParams({
-    title: `You voted ${choice?.toUpperCase()}!`,
+    title: voted
+      ? `Sorry, you already voted ${voted}. You can't vote twice.`
+      : `You voted ${choice?.toUpperCase()}!`,
   });
 
   return new NextResponse(`<!DOCTYPE html><html><head>
