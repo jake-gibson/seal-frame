@@ -153,7 +153,9 @@ export async function GET(request: Request) {
                       fontSize: 30,
                     }}
                   >
-                    {`${yesPercent.toFixed(2).slice(2)}%`}
+                    {`${
+                      yesPercent !== 0 ? yesPercent.toFixed(2).slice(2) : ''
+                    }%`}
                   </div>
                   <div
                     style={{
@@ -167,7 +169,9 @@ export async function GET(request: Request) {
                       color: 'white',
                       fontSize: 30,
                     }}
-                  >{`${noPercent.toFixed(2).slice(2)}%`}</div>
+                  >{`${
+                    noPercent !== 0 ? noPercent.toFixed(2).slice(2) : ''
+                  }%`}</div>
                 </div>
                 <p
                   style={{
