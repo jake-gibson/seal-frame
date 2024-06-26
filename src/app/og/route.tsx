@@ -154,11 +154,7 @@ export async function GET(request: Request) {
                     }}
                   >
                     {`${
-                      yesPercent !== 0
-                        ? yesPercent === 1
-                          ? '100%'
-                          : yesPercent.toFixed(2).slice(2) + '%'
-                        : ''
+                      yesPercent !== 0 ? `${Math.round(yesPercent * 100)}%` : ''
                     }`}
                   </div>
                   <div
@@ -174,11 +170,7 @@ export async function GET(request: Request) {
                       fontSize: 30,
                     }}
                   >{`${
-                    noPercent !== 0
-                      ? noPercent === 1
-                        ? '100%'
-                        : noPercent.toFixed(2).slice(2) + '%'
-                      : ''
+                    noPercent !== 0 ? `${Math.round(noPercent * 100)}%` : ''
                   }`}</div>
                 </div>
                 <p
