@@ -6,18 +6,16 @@ export const runtime = 'edge';
 
 export async function GET(request: Request) {
   try {
-
     const { searchParams } = new URL(request.url);
 
     // ?title=<title>
     const hasTitle = searchParams.has('title');
     const title = hasTitle ? searchParams.get('title')?.slice(0, 100) : '';
 
-    // ?description=
-    const hasDescription = searchParams.has('description');
-    const description = hasDescription
-      ? searchParams.get('description')?.slice(0, 100)
-      : '';
+    // ?total=...
+    const total = searchParams.get('total');
+    const yes = searchParams.get('yes');
+    const no = searchParams.get('no');
 
     return new ImageResponse(
       (
@@ -33,6 +31,7 @@ export async function GET(request: Request) {
             fontSize: 80,
             fontWeight: 700,
             textAlign: 'center',
+            border: '1px solid black',
           }}
         >
           <p
@@ -48,22 +47,20 @@ export async function GET(request: Request) {
           >
             {title}
           </p>
-          {description && (
-            <p
-              style={{
-                backgroundImage:
-                  'linear-gradient(90deg, rgb(121, 40, 202), rgb(255, 0, 128))',
-                backgroundClip: 'text',
-                color: 'transparent',
-                fontSize: 80,
-                fontWeight: 700,
-                margin: 0,
-                marginTop: 20,
-              }}
-            >
-              {description}
-            </p>
-          )}
+          <p
+            style={{
+              backgroundImage:
+                'linear-gradient(90deg, rgb(121, 40, 202), rgb(255, 0, 128))',
+              backgroundClip: 'text',
+              color: 'transparent',
+              fontSize: 80,
+              fontWeight: 700,
+              margin: 0,
+              marginTop: 20,
+            }}
+          >
+            {`Total: ${total}  Yes: ${yes}  No: ${no}`}
+          </p>
         </div>
       ),
       {

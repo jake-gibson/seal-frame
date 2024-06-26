@@ -50,8 +50,11 @@ export async function castVote(req: NextRequest, choice: string): Promise<voterI
   console.log('my name is:', user);
   console.log('my vote is:', choice);
 
-  const voted = await kv.hget('test:voters', `${user}`);
-  if(voted) voterData.voted = true;
+  const voted = (await kv.hget('test:voters', `${user}`)) as unknown as string;
+  if(voted) {
+    voterData.myVote = voted;
+    voterData.voted = true;
+  }
   else {
     //Record user as a voter
     await kv.hset('test:voters', { [user]: choice });
